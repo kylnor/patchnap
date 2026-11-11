@@ -84,12 +84,42 @@ struct OverviewView: View {
 }
 struct AppsView: View {
     @Bindable var model: AppModel
-    var apps: [InstalledApp] { model.snapshot.apps.filter { model.search.isEmpty || $0.name.localizedCaseInsensitiveContains(model.search) } }
     var body: some View {
+        let apps = model.visibleApps
         VStack(spacing: 0) {
-            TextField("Search installed apps", text: $model.search).textFieldStyle(.roundedBorder).padding(12)
+            VStack(alignment: .leading, spacing: 10) {
+                TextField("Search installed apps", text: $model.filters.search)
+                    .textFieldStyle(.roundedBorder)
+                    .accessibilityIdentifier("app-search")
+                HStack(spacing: 16) {
+                    Picker("Source", selection: $model.filters.source) {
+                        Text("All sources").tag(Optional<Provider>.none)
+                        ForEach(Provider.allCases, id: \.self) { provider in
+                            Text(provider.label).tag(Optional(provider))
+                        }
+                    }.pickerStyle(.menu).foregroundStyle(.primary).accessibilityIdentifier("app-source-filter")
+                    Picker("Status", selection: $model.filters.status) {
+                        Text("All statuses").tag(Optional<AppStatus>.none)
+                        ForEach(AppStatus.allCases) { status in
+                            Text(status.label).tag(Optional(status))
+                        }
+                    }.pickerStyle(.menu).foregroundStyle(.primary).accessibilityIdentifier("app-status-filter")
+                    if model.filters.isActive {
+                        Button("Clear filters") { model.clearFilters() }
+                            .accessibilityIdentifier("clear-app-filters")
+                    }
+                }.controlSize(.small)
+                Text("\(apps.count) of \(model.snapshot.apps.count) apps")
+                    .font(.caption).foregroundStyle(.secondary)
+            }.padding(12)
             if apps.isEmpty {
-                ContentUnavailableView(model.snapshot.apps.isEmpty ? "Check for your installed apps" : "No matching apps", systemImage: "square.grid.2x2", description: Text(model.snapshot.apps.isEmpty ? "Run your first check to see supported sources and available updates." : "Try a different app name."))
+                ContentUnavailableView {
+                    Label(model.snapshot.apps.isEmpty ? "Check for your installed apps" : "No matching apps", systemImage: "square.grid.2x2")
+                } description: {
+                    Text(model.snapshot.apps.isEmpty ? "Run your first check to see supported sources and available updates." : "Try a different search, source, or status.")
+                } actions: {
+                    if model.filters.isActive { Button("Clear filters") { model.clearFilters() } }
+                }
             } else {
                 List(apps) { app in
                     HStack(spacing: 12) {
@@ -102,11 +132,23 @@ struct AppsView: View {
                         }
                         Spacer()
                         Text(model.status(app)).font(.caption).foregroundStyle(.secondary)
+                            .fixedSize(horizontal: true, vertical: false)
                         Menu {
                             Button(model.settings.excluded.contains(app.id) ? "Include in updates" : "Exclude from updates") { model.exclude(app) }
                             Button(model.settings.heldVersions[app.id] == nil ? "Hold version \(app.installedVersion)" : "Release version hold") { model.hold(app) }
                             if !app.path.isEmpty { Button("Show in Finder") { NSWorkspace.shared.selectFile(app.path, inFileViewerRootedAtPath: "") } }
-                        } label: { Image(systemName: "ellipsis.circle") }.menuStyle(.borderlessButton).frame(width: 25).disabled(model.demo)
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .font(.system(size: 14, weight: .semibold))
+                                .frame(width: 28, height: 28)
+                                .contentShape(Rectangle())
+                        }
+                        .menuStyle(.borderlessButton)
+                        .menuIndicator(.hidden)
+                        .frame(width: 32, height: 28)
+                        .accessibilityLabel("Actions for \(app.name)")
+                        .help("Actions for \(app.name)")
+                        .disabled(model.demo)
                     }.padding(.vertical, 5)
                 }.listStyle(.inset)
             }
@@ -149,7 +191,7 @@ struct PreferencesView: View {
                 }
             }
             Section("About") {
-                LabeledContent("Patchnap", value: "0.1.0 · Early alpha")
+                LabeledContent("Patchnap", value: "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Development") · Early alpha")
                 Link("Source code and issues", destination: URL(string: "https://github.com/kylnor/patchnap")!)
                 Text("No telemetry. Settings and history stay on this Mac.").font(.caption).foregroundStyle(.secondary)
             }

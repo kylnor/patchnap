@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Provider: String, Codable, Sendable { case appStore, homebrew, catalog, unsupported }
+public enum Provider: String, Codable, CaseIterable, Sendable { case appStore, homebrew, catalog, unsupported }
 public enum Outcome: String, Codable, Sendable { case current, available, deferred, updated, needsAttention, unsupported }
 
 public struct InstalledApp: Codable, Identifiable, Equatable, Sendable {

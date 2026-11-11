@@ -16,12 +16,21 @@ import PatchnapCore
     var helperInstalled = false
     var helperBusy = false
     var demo: Bool
-    var search = ""
+    var filters = AppListFilters()
     var tab = 0
     init() {
         demo = CommandLine.arguments.contains("--demo")
         if let argument = CommandLine.arguments.first(where: { $0.hasPrefix("--demo-tab=") }), let value = Int(argument.dropFirst("--demo-tab=".count)), (0...3).contains(value) { tab = value }
         if demo {
+            if let argument = CommandLine.arguments.first(where: { $0.hasPrefix("--demo-source=") }) {
+                filters.source = Provider(rawValue: String(argument.dropFirst("--demo-source=".count)))
+            }
+            if let argument = CommandLine.arguments.first(where: { $0.hasPrefix("--demo-status=") }) {
+                filters.status = AppStatus(rawValue: String(argument.dropFirst("--demo-status=".count)))
+            }
+            if let argument = CommandLine.arguments.first(where: { $0.hasPrefix("--demo-search=") }) {
+                filters.search = String(argument.dropFirst("--demo-search=".count))
+            }
             settings.enabled = true; snapshot.lastCheck = Date(); snapshot.message = "Updates handled. Rest easy."
             snapshot.apps = [
                 InstalledApp(id: "store:1", name: "Things", bundleID: "com.culturedcode.ThingsMac", path: "", installedVersion: "3.22", provider: .appStore, token: "1"),
@@ -90,18 +99,18 @@ import PatchnapCore
         if settings.heldVersions[app.id] != nil { settings.heldVersions[app.id] = nil } else { settings.heldVersions[app.id] = app.installedVersion }
         save()
     }
-    func status(_ app: InstalledApp) -> String {
-        if settings.excluded.contains(app.id) { return "Excluded" }
-        if settings.heldVersions[app.id] != nil { return "Version held" }
-        if let attempt = snapshot.attempts[app.id], attempt.retryAfter > Date() { return "Needs attention" }
-        if !app.automatic || app.provider == .unsupported { return "Manual update" }
-        if app.needsUpdate {
-            let condition = SystemConditions.read()
-            if condition.runningBundleIDs?.contains(app.bundleID) == true { return "App open" }
-            return "Update available"
+    var visibleApps: [InstalledApp] {
+        let running = SystemConditions.read().runningBundleIDs
+        let now = Date()
+        return snapshot.apps.filter { app in
+            filters.matches(app, status: AppStatus.classify(app, settings: settings, attempt: snapshot.attempts[app.id], runningBundleIDs: running, now: now))
         }
-        return "Up to date"
     }
+    func status(_ app: InstalledApp) -> String {
+        AppStatus.classify(app, settings: settings, attempt: snapshot.attempts[app.id],
+                           runningBundleIDs: SystemConditions.read().runningBundleIDs).label
+    }
+    func clearFilters() { filters = AppListFilters() }
     func configureHelper(remove: Bool = false) async {
         guard !demo, !helperBusy else { return }
         helperBusy = true; defer { helperBusy = false; refreshService() }

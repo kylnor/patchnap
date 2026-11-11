@@ -24,9 +24,13 @@ import AppKit
     var window: NSWindow?
     func show() {
         if window == nil {
-            let controller = NSHostingController(rootView: Dashboard(model: AppModel.shared))
+            let previewScheme: ColorScheme? = CommandLine.arguments.contains("--appearance-light") ? .light
+                : CommandLine.arguments.contains("--appearance-dark") ? .dark : nil
+            let controller = NSHostingController(rootView: Dashboard(model: AppModel.shared).transformEnvironment(\.colorScheme) { scheme in
+                if let previewScheme { scheme = previewScheme }
+            })
             let new = NSWindow(contentViewController: controller)
-            new.title = "Patchnap"; new.setContentSize(NSSize(width: 850, height: 650))
+            new.title = AppModel.shared.demo ? "Patchnap Preview" : "Patchnap"; new.setContentSize(NSSize(width: 850, height: 650))
             new.minSize = NSSize(width: 680, height: 540)
             if CommandLine.arguments.contains("--compact") { new.setContentSize(NSSize(width: 680, height: 540)) }
             if CommandLine.arguments.contains("--appearance-light") { new.appearance = NSAppearance(named: .aqua) }
@@ -34,6 +38,10 @@ import AppKit
             new.styleMask = [.titled, .closable, .miniaturizable, .resizable]
             new.isReleasedWhenClosed = false; new.center(); window = new
         }
-        window?.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true)
+        if AppModel.shared.demo && CommandLine.arguments.contains("--background-preview") {
+            window?.orderBack(nil)
+        } else {
+            window?.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true)
+        }
     }
 }
