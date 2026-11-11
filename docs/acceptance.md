@@ -25,7 +25,7 @@ The standalone adapter additionally passed fixture tests for catalog ambiguity, 
 
 - Final native SwiftUI app and three executables built on Apple Silicon.
 - The release bundle passed `codesign --verify --deep --strict`.
-- Apple notarization accepted submission `013db29e-25fc-4cf1-83b9-e13b84874f79`; stapling and ticket validation passed, and Gatekeeper reported `accepted`, `source=Notarized Developer ID`.
+- Apple notarization accepted submission `c6b8a357-51cf-4244-887f-ac9f31acfdc7`; stapling and ticket validation passed, and Gatekeeper reported `accepted`, `source=Notarized Developer ID`.
 - The packaged App Store binary's JSON output was checked directly; a bundled-agent read-only discovery pass was run separately from unit tests.
 - Real inventory checks included App Store apps, installed Homebrew casks, catalog-matched standalone apps and unsupported apps. No real application upgrade was performed.
 
