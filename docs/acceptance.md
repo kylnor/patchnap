@@ -21,7 +21,7 @@ An independent fresh review returned `ship` for the captured desktop light overv
 
 The standalone adapter additionally passed fixture tests for catalog ambiguity, stable HTTPS checksummed downloads, architecture/macOS metadata, known SHA-256 content, refusal of archive traversal, and restoration of an actual temporary directory after failed replacement verification. No real user application was updated by these tests.
 
-## Release packaging verified
+## Initial 0.1.0 release packaging verified
 
 - Final native SwiftUI app and three executables built on Apple Silicon.
 - The release bundle passed `codesign --verify --deep --strict`.

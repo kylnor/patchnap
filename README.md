@@ -18,6 +18,7 @@ A small, open-source Mac utility that checks for stable app updates and installs
 - Waits for external power and at least ten minutes without keyboard or mouse activity.
 - Leaves running apps alone; pauses between installs when you return.
 - Supports per-app exclusions, holding an installed version, bounded retries, and a local history.
+- Filters the app list by source and status, combined with search, with a matching count and clear action.
 - Reads the resulting app version and developer signature after installation before calling an update complete.
 - Shows unsupported apps and provider failures instead of claiming everything is current.
 
