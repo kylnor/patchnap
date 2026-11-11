@@ -68,7 +68,11 @@ import PatchnapCore
     func removeBackground() async {
         guard !demo else { return }
         settings.enabled = false; save()
-        do { try await service.unregister(); refreshService() } catch { self.error = error.localizedDescription }
+        do {
+            let registration = SMAppService.agent(plistName: "com.patchnap.agent.plist")
+            try await registration.unregister()
+            refreshService()
+        } catch { self.error = error.localizedDescription }
     }
     func check() async {
         guard !checking else { return }
