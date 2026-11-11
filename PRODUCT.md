@@ -2,7 +2,7 @@
 
 Patchnap is a free, open-source macOS utility that checks for stable application updates and installs eligible updates while the computer is idle and on power.
 
-Kyle chose the name Patchnap on November 11, 2026. Working line: “Updates handled. Go get some sleep.” The intended personality is friendly, playful, and dependable, with a sleepy little patch mascot. patchnap.com returned unregistered at the initial Verisign RDAP check on November 11, 2026, then registered at the final check. Ownership and DNS are not confirmed. No trademark clearance has been performed.
+Kyle chose the name Patchnap on November 11, 2026. Working line: “Updates handled. Go get some sleep.” The intended personality is friendly, playful, and dependable, with a sleepy little patch mascot. patchnap.com returned unregistered at the initial Verisign RDAP check on November 11, 2026, then registered at the final check. Kyle confirmed registering patchnap.com during the build; DNS and hosting are not yet configured. No trademark clearance has been performed.
 
 ## People and promise
 

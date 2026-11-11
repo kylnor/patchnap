@@ -49,5 +49,5 @@ codesign --force --sign "$patchnap_identity" "${patchnap_sign_flags[@]}" "$patch
 codesign --verify --deep --strict "$patchnap_app"
 patchnap_zip="$PWD/dist/Patchnap-0.1.0-$patchnap_arch.zip"
 ditto -c -k --sequesterRsrc --keepParent "$patchnap_app" "$patchnap_zip"
-shasum -a 256 "$patchnap_zip" > "$patchnap_zip.sha256"
+(cd dist && shasum -a 256 "$(basename "$patchnap_zip")" > "$(basename "$patchnap_zip").sha256")
 printf '%s\n' "$patchnap_zip"
