@@ -1,0 +1,6 @@
+THESIS: Patchnap completes safe update chores while the user is away, and makes actual coverage and unfinished work legible.
+OWN-WORLD: Quilt club, selected by Kyle. Soft mint #A9DBC5, grape actions #5B477F, a sleepy stitched patch mascot; semantic native macOS surfaces and controls. The world contributes palette, rounded wordmark, density and a small completion character; it never replaces familiar controls.
+STORY: Overview explains current maintenance; Apps shows sources, versions and controls; Activity records verified results and failures; Settings separates background operation from installation authority.
+FIRST VIEWPORT: Native macOS window, mascot and product line in a quiet mint header, a check action, standard tabs and real status. Menu bar remains compact. Demo captures explicitly label illustrative data.
+FORM: Code-led native SwiftUI. Seed reference seed:e6ba7ae206c4ab3c. User selected Quilt club over the assigned morning-cafe direction. No comp-led reproduction claim.
+FINISH: Review desktop light, app list light and minimum-size settings dark. Native macOS only; no mobile site ships. No web detector ran. Functional policy, metadata, rollback and archive security are separately tested.

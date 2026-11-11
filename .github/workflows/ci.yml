@@ -1,0 +1,26 @@
+name: macOS checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test-and-build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test eligibility, persistence and provider parsing
+        run: swift test
+      - name: Build unsigned development app
+        run: scripts/build-app.sh
+      - name: Verify bundle layout and signature
+        run: |
+          plutil -lint dist/Patchnap.app/Contents/Info.plist
+          plutil -lint dist/Patchnap.app/Contents/Library/LaunchAgents/com.patchnap.agent.plist
+          codesign --verify --deep --strict dist/Patchnap.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Patchnap-development-build
+          path: |
+            dist/*.zip
+            dist/*.sha256

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-11T12:26:56.828993+00:00",
+  "title": "Design System: Patchnap",
+  "extensions": {
+    "colorMeta": {
+      "grape-action": {
+        "role": "primary",
+        "displayName": "Grape action"
+      },
+      "patch-mint": {
+        "role": "secondary",
+        "displayName": "Patch mint"
+      }
+    },
+    "typographyMeta": {
+      "wordmark": {
+        "displayName": "Native rounded wordmark",
+        "purpose": "Product wordmark only; standard system text elsewhere."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "Minimum native window",
+        "value": "680pt \u00d7 540pt"
+      }
+    ]
+  },
+  "components": [],
+  "narrative": {
+    "northStar": "Quilt club",
+    "overview": "A sleepy stitched patch handles update chores. Native controls and honest statuses keep maintenance legible.",
+    "keyCharacteristics": [
+      "Original sleepy stitched mascot",
+      "Mint header and grape actions",
+      "Native macOS navigation and controls",
+      "Explicit supported coverage"
+    ],
+    "rules": [
+      {
+        "name": "Standard controls",
+        "body": "Brand appears in palette, rounded wordmark and mascot; controls retain macOS behavior.",
+        "section": "layout"
+      }
+    ],
+    "dos": [
+      "Show unsupported sources and failures.",
+      "Label demonstration data.",
+      "Use semantic native surfaces in both appearances."
+    ],
+    "donts": [
+      "Do not call a process exit a verified update.",
+      "Do not replace normal action labels with sleep puns."
+    ]
+  }
+}

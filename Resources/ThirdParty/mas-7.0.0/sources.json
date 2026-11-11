@@ -1,0 +1,69 @@
+[
+  {
+    "name": "bigint",
+    "version": "5.7.0",
+    "revision": "e07e00fa1fd435143a2dcf8b7eec9a7710b2fdfe",
+    "source": "https://raw.githubusercontent.com/attaswift/BigInt/e07e00fa1fd435143a2dcf8b7eec9a7710b2fdfe/LICENSE.md"
+  },
+  {
+    "name": "chronometer",
+    "version": "0.1.14",
+    "revision": "99d4f4137837a28e1e294eb69ac66ad53c0934d3",
+    "source": "https://raw.githubusercontent.com/KittyMac/Chronometer/99d4f4137837a28e1e294eb69ac66ad53c0934d3/LICENSE"
+  },
+  {
+    "name": "gram",
+    "version": "2.0.0",
+    "revision": "d9276e23523174cd04213e945f146dd9a553a571",
+    "source": "https://raw.githubusercontent.com/rarestype/gram/d9276e23523174cd04213e945f146dd9a553a571/LICENSE"
+  },
+  {
+    "name": "hitch",
+    "version": "0.4.153",
+    "revision": "067a1e36837a8e62461841665715028bf3b48f5f",
+    "source": "https://raw.githubusercontent.com/KittyMac/Hitch/067a1e36837a8e62461841665715028bf3b48f5f/README.md",
+    "section": "Hitch License"
+  },
+  {
+    "name": "sextant",
+    "version": "0.4.39",
+    "revision": "6e83a22ceb31a59fc76333f5c2346d989f78a309",
+    "source": "https://raw.githubusercontent.com/KittyMac/Sextant/6e83a22ceb31a59fc76333f5c2346d989f78a309/LICENSE"
+  },
+  {
+    "name": "spanker",
+    "version": "0.2.53",
+    "revision": "ff05ac41aea633ca7a9fd966d3164373247ee8dd",
+    "source": "https://raw.githubusercontent.com/KittyMac/Spanker/ff05ac41aea633ca7a9fd966d3164373247ee8dd/LICENSE"
+  },
+  {
+    "name": "swift-argument-parser",
+    "version": "1.7.1",
+    "revision": "626b5b7b2f45e1b0b1c6f4a309296d1d21d7311b",
+    "source": "https://raw.githubusercontent.com/apple/swift-argument-parser/626b5b7b2f45e1b0b1c6f4a309296d1d21d7311b/LICENSE.txt"
+  },
+  {
+    "name": "swift-atomics",
+    "version": "1.3.0",
+    "revision": "b601256eab081c0f92f059e12818ac1d4f178ff7",
+    "source": "https://raw.githubusercontent.com/apple/swift-atomics/b601256eab081c0f92f059e12818ac1d4f178ff7/LICENSE.txt"
+  },
+  {
+    "name": "swift-collections",
+    "version": "1.4.1",
+    "revision": "6675bc0ff86e61436e615df6fc5174e043e57924",
+    "source": "https://raw.githubusercontent.com/apple/swift-collections/6675bc0ff86e61436e615df6fc5174e043e57924/LICENSE.txt"
+  },
+  {
+    "name": "swift-json",
+    "version": "3.3.0",
+    "revision": "7f39f41878ed56acccc3634d917022737c82e030",
+    "source": "https://raw.githubusercontent.com/mas-cli/swift-json/7f39f41878ed56acccc3634d917022737c82e030/LICENSE"
+  },
+  {
+    "name": "swiftsoup",
+    "version": "2.13.4",
+    "revision": "6c7915e16f729857aec3e99068c361e58a00ed68",
+    "source": "https://raw.githubusercontent.com/scinfu/SwiftSoup/6c7915e16f729857aec3e99068c361e58a00ed68/LICENSE"
+  }
+]
